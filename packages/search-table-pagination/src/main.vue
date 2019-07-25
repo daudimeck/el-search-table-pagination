@@ -1,7 +1,6 @@
 
 <template>
   <div>
-
     <search-form
       v-if="formOptions"
       ref="searchForm"
@@ -15,8 +14,7 @@
       :submit-loading="loading"
       :showResetBtn="formOptions.showResetBtn"
       :submitBtnText="formOptions.submitBtnText"
-      :resetBtnText="formOptions.resetBtnText"
-      :resetBtnCallback="formOptions.resetBtnCallback" />
+      :resetBtnText="formOptions.resetBtnText" />
 
     <slot name="form" :loading="loading" :search="searchHandler" />
 
@@ -65,9 +63,8 @@
 
       <slot name="prepend" />
 
-      <template v-for="(column, columnIndex) in columns">
+      <div v-for="(column, columnIndex) in columns" :key="columnIndex">
         <el-table-column
-          :key="columnIndex"
           :column-key="column.columnKey"
           :prop="column.prop"
           :label="column.label"
@@ -92,7 +89,8 @@
           :filter-multiple="column.filterMultiple"
           :filter-method="column.filterMethod"
           :filtered-value="column.filteredValue"
-          v-if="column.type === undefined">
+          v-if="column.type === undefined"
+          >
           <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false">
             <span v-if="column.filter">
               {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
@@ -111,8 +109,18 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column v-bind="column" :key="columnIndex" v-else></el-table-column>
-      </template>
+        <el-table-column v-else-if="column.type === 'expand'" type="expand">
+          <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false">
+            <span v-if="column.slotName">
+              <slot :name="column.slotName" :row="scope.row" :$index="scope.$index" />
+            </span>
+            <span v-else>
+              {{ scope.row[column.prop] }}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column v-bind="column" v-else></el-table-column>
+      </div>
 
       <slot name="append" />
 
