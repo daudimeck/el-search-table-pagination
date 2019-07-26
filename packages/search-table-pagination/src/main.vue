@@ -107,6 +107,19 @@
             <span v-else>{{ scope.row[column.prop] }}</span>
           </template>
         </el-table-column>
+        <el-table-column
+          v-else-if="column.type === 'expand'"
+          type="expand"
+          v-bind="column"
+          :key="columnIndex"
+        >
+          <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false">
+            <span v-if="column.slotName">
+              <slot :name="column.slotName" :row="scope.row" :$index="scope.$index" />
+            </span>
+            <span v-else>{{ scope.row[column.prop] }}</span>
+          </template>
+        </el-table-column>
         <el-table-column v-bind="column" :key="columnIndex" v-else></el-table-column>
       </template>
 
