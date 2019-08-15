@@ -171,7 +171,7 @@ export default {
     }
   },
   watch: {
-    params: {
+    /* params: {
       handler(val, oldval) {
         //timeout for a bit to set the value
         setTimeout(() => {
@@ -179,7 +179,7 @@ export default {
         }, 50);
       },
       deep: true
-    }
+    } */
   },
   methods: {
     isArray(value) {
