@@ -175,7 +175,7 @@ export default {
       handler(val, oldval) {
         //trigger search handler
         const { onSearchHandler } = this;
-        console.log(onSearchHandler);
+        console.log(onSearchHandler, val);
         if (onSearchHandler) {
           onSearchHandler(val);
         }
