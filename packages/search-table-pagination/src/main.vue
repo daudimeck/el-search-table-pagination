@@ -11,6 +11,7 @@
       :label-width="formOptions.labelWidth"
       :item-width="formOptions.itemWidth"
       :submit-handler="searchHandler"
+      :on-search-handler="formOptions.onSearchHandler"
       :submit-loading="loading"
       :showResetBtn="formOptions.showResetBtn"
       :submitBtnText="formOptions.submitBtnText"
