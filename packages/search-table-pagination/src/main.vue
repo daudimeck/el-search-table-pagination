@@ -11,6 +11,7 @@
       :label-width="formOptions.labelWidth"
       :item-width="formOptions.itemWidth"
       :submit-handler="searchHandler"
+      :on-search-handler="onSearchHandler"
       :submit-loading="loading"
       :showResetBtn="formOptions.showResetBtn"
       :submitBtnText="formOptions.submitBtnText"
@@ -189,7 +190,10 @@ export default {
       if (resetPageIndex) {
         this.pagination.pageIndex = 1;
       }
-      this.dataChangeHandler(arguments[0]);
+      this.dataChangeHandler();
+    },
+    onSearchHandler() {
+      console.log(arguments[0]);
     },
     dataChangeHandler() {
       const { type } = this;

@@ -173,8 +173,11 @@ export default {
   watch: {
     params: {
       handler(val, oldval) {
-        //timeout for a bit to set the value
-        this.getParams();
+        //trigger search handler
+        const { onSearchHandler } = this;
+        if (onSearchHandler) {
+          onSearchHandler(val);
+        }
       },
       deep: true
     }
@@ -191,7 +194,6 @@ export default {
         if (!error) {
           const { submitHandler } = this;
           if (submitHandler) {
-            console.log(params);
             submitHandler(params);
           } else {
             throw new Error("Need to set attribute: submitHandler !");
