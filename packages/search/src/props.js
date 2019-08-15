@@ -20,6 +20,7 @@ export const formProps = {
   labelWidth: Number,
   itemWidth: Number,
   submitHandler: Function,
+  onSearchHandler: Function,
   submitLoading: {
     type: Boolean,
     default: false

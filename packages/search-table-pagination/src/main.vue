@@ -10,8 +10,7 @@
       :inline="formOptions.inline"
       :label-width="formOptions.labelWidth"
       :item-width="formOptions.itemWidth"
-      :submit-handler="searchHandler"
-      :on-search-handler="onSearchHandler"
+      :on-search-handler="formOptions.onSearchHandler"
       :submit-loading="loading"
       :showResetBtn="formOptions.showResetBtn"
       :submitBtnText="formOptions.submitBtnText"
@@ -50,6 +49,7 @@
       :style="tableStyle"
       @select="(selection, row) => emitEventHandler('select', selection, row)"
       @select-all="selection => emitEventHandler('select-all', selection)"
+      @search="({params}) => emitEventHandler('onSearch', params)"
       @selection-change="selection => emitEventHandler('selection-change', selection)"
       @cell-mouse-enter="(row, column, cell, event) => emitEventHandler('cell-mouse-enter', row, column, cell, event)"
       @cell-mouse-leave="(row, column, cell, event) => emitEventHandler('cell-mouse-leave', row, column, cell, event)"
@@ -190,10 +190,7 @@ export default {
       if (resetPageIndex) {
         this.pagination.pageIndex = 1;
       }
-      this.dataChangeHandler();
-    },
-    onSearchHandler() {
-      console.log(arguments[0]);
+      this.dataChangeHandler(arguments[0]);
     },
     dataChangeHandler() {
       const { type } = this;
