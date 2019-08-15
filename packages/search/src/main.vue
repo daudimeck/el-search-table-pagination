@@ -171,15 +171,13 @@ export default {
     }
   },
   watch: {
-    /* params: {
+    params: {
       handler(val, oldval) {
         //timeout for a bit to set the value
-        setTimeout(() => {
-          this.$refs.submitButton.$el.click();
-        }, 50);
+        this.getParams();
       },
       deep: true
-    } */
+    }
   },
   methods: {
     isArray(value) {
